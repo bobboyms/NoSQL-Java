@@ -2,21 +2,21 @@ package br.com.br.nosql.model;
 
 public class Document {
 
-	private Long id;
+	private Integer id;
 	private String text;
 
 	public Document() {}
 
-	public Document(Long id, String text) {
+	public Document(Integer id, String text) {
 		this.id = id;
 		this.text = text;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
