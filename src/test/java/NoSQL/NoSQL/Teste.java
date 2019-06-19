@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.github.wnameless.json.flattener.JsonFlattener;
+
 class CommonJSONParser {
 
 	public Map<String, Object> parse(String jsonStr) {
@@ -91,42 +93,44 @@ class CommonJSONParser {
 }
 
 public class Teste {
+	
+	static StringBuilder builder = new StringBuilder();
 
 	@SuppressWarnings("unchecked")
-	public static void parse(Map<String, Object> parse, String chave, int id) {
-		
+	public static int parse(Map<String, Object> parse) {
+				
 		for (Entry<String, Object> entry : parse.entrySet()) {
 			
 			if (entry.getValue() instanceof HashMap) {
 				//System.out.println(entry.getKey());
-				//chave = chave + "." + entry.getKey();
-				System.out.println("Antes de chamar func: " + entry.getKey() + " id:" + id);
-				int novo = id + 1;
-				parse((Map<String, Object>)entry.getValue(), chave, novo);
-				System.out.println("Depois: " + entry.getKey() + " id:" + id);
+//				chave = chave + "." + entry.getKey();
+				System.out.println(entry.getKey());
+				parse((Map<String, Object>)entry.getValue());
+
 			} else {
 				
 				
-				StringBuilder builder = new StringBuilder();
-				
+//				StringBuilder builder = new StringBuilder();
+//				
 //				if (chave.trim().length() > 0) {
 //					builder.append(chave);
 //					builder.append(".");
 //				}
+				System.out.println(entry.getKey());
+
 				
-				builder.append(entry.getKey().toString());
-				
-				System.out.println(builder.toString());
+//				System.out.println(builder.toString());
 				//System.out.println(entry.getValue().getClass());
 			}
 			
 		}
 		
+		return 0;
 		
 	}
 	
 	static boolean acabou = false;
-
+	// https://github.com/wnameless/json-flattener
 	public static void main(String[] args) {
 
 		String jsonStr = "{\r\n" + 
@@ -148,9 +152,15 @@ public class Teste {
 
 		// JSONObject jobject = new JSONObject(jsonStr);
 
-		Map<String, Object> parse = new CommonJSONParser().parse(jsonStr);
+		Map<String, Object> flattenJson = JsonFlattener.flattenAsMap(jsonStr);
 		
-		parse(parse, "", 0);
+		for (Entry<String, Object> entry : flattenJson.entrySet()) {
+			System.out.println(entry.getKey());
+		}
+		
+		//System.out.println(flattenJson);
+		
+		
 
 	}
 
