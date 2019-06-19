@@ -1,5 +1,6 @@
 package NoSQL.NoSQL;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -157,6 +158,8 @@ public class Teste {
 		for (Entry<String, Object> entry : flattenJson.entrySet()) {
 			System.out.println(entry.getKey());
 		}
+		
+		System.out.println(Paths.get(".").toAbsolutePath().normalize().toString());
 		
 		//System.out.println(flattenJson);
 		
