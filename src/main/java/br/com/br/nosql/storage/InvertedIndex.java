@@ -1,51 +1,34 @@
 package br.com.br.nosql.storage;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Set;
 
 public class InvertedIndex {
-	
-	private Map<Integer, List<Integer>> InvertedIndexMap; // = new HashMap<Integer, List<Integer>>()
-	
+	private Map<Integer, Set<Integer>> InvertedIndexMap;
+
 	public void index(Integer idWord, Integer idDocument) {
-		
-		List<Integer> listIndexedDocs = getInvertedIndexMap().get(idWord);
-		if (listIndexedDocs == null) {			
-			listIndexedDocs = new ArrayList<Integer>();
+		Set<Integer> listIndexedDocs = (Set) getInvertedIndexMap().get(idWord);
+
+		if (listIndexedDocs == null) {
+			listIndexedDocs = new HashSet();
 			listIndexedDocs.add(idDocument);
 			getInvertedIndexMap().put(idWord, listIndexedDocs);
-			
 		} else {
-			
-			boolean existe = false;
-			for (int i = 0; i < listIndexedDocs.size(); i++) {
-				existe = (listIndexedDocs.get(i) == idDocument);
-			}
-			
-			if (!existe) {
-				listIndexedDocs.add(idDocument);				
-			}
-			
+			listIndexedDocs.add(idDocument);
 		}
-		
-		
-		
 	}
-	
+
 	public InvertedIndex() {
-		setInvertedIndexMap(new HashMap<Integer, List<Integer>>());
+		setInvertedIndexMap(new HashMap());
 	}
-	
-	public Map<Integer, List<Integer>> getInvertedIndexMap() {
+
+	public Map<Integer, Set<Integer>> getInvertedIndexMap() {
 		return InvertedIndexMap;
 	}
 
-	private void setInvertedIndexMap(Map<Integer, List<Integer>> invertedIndexMap) {
+	public void setInvertedIndexMap(Map<Integer, Set<Integer>> invertedIndexMap) {
 		InvertedIndexMap = invertedIndexMap;
 	}
-	
 }

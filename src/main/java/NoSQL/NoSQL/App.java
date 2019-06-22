@@ -21,7 +21,7 @@ import br.com.br.nosql.storage.Index;
  */
 public class App {
 	public static void main(String[] args) throws IOException {
-		
+
 		long startTime = System.currentTimeMillis();
 		int total = 0;
 		List<Document> documents = new ArrayList<Document>();
@@ -72,7 +72,7 @@ public class App {
 		Path path2 = Paths.get("C:\\teste\\banco.txt");
 		try (BufferedWriter writer = Files.newBufferedWriter(path2, Charset.forName("UTF-8"),
 				StandardOpenOption.APPEND)) {
-			
+
 			for (Entry<Integer, List<Integer>> entry : index.getInvertedIndex().getInvertedIndexMap().entrySet()) {
 
 				StringBuilder builder = new StringBuilder();
@@ -86,8 +86,8 @@ public class App {
 					builder.append("|");
 				}
 
-				//builder.append("\n");
-				
+				// builder.append("\n");
+
 				writer.append(builder.toString());
 				writer.newLine();
 
@@ -101,7 +101,7 @@ public class App {
 
 		stopTime = System.currentTimeMillis();
 		elapsedTime = stopTime - startTime;
-		 System.out.println(elapsedTime);
+		System.out.println(elapsedTime);
 //		 System.out.println(total);
 
 //		stopTime= System.currentTimeMillis();
